@@ -3,37 +3,28 @@ name: Build and Deploy Angular
 on:
   push:
     branches:
-      - main  # Ajusta si tu rama principal se llama distinto
+      - main
 
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
-
     steps:
       - name: Check out the repository
         uses: actions/checkout@v3
 
-      # 1. Usa Node 18 (o superior)
       - name: Use Node.js 18
         uses: actions/setup-node@v3
         with:
           node-version: 18
 
-      # 2. Instala las dependencias de tu proyecto
       - name: Install dependencies
-        run: npm install
+        run: npm install  # O "cd angular && npm install" si está en subcarpeta
 
-      # 3. Instala Angular CLI globalmente
-      - name: Install Angular CLI
-        run: npm install -g @angular/cli
-
-      # 4. Compila tu proyecto Angular
       - name: Build Angular
-        run: ng build --configuration production --base-href /luna-y-sol/
+        run: npx ng build --configuration production --base-href /luna-y-sol/
 
-      # 5. Despliega en GitHub Pages (ajusta si tu carpeta es distinta)
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./docs/browser
+          publish_dir: ./docs  # O "./docs/browser", según tu salida
