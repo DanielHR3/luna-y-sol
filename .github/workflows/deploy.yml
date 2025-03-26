@@ -27,7 +27,7 @@ jobs:
       # 4. Compilar la aplicación Angular
       #    Se sobrescribe el baseHref para asegurar que apunte a '/luna-y-sol/'
       - name: Build Angular app
-        run: ng build --configuration production --base-href /luna-y-sol/
+        run: npx ng build --configuration production --base-href /luna-y-sol/
 
       # 5. Desplegar en GitHub Pages
       #    Se publica el contenido de la carpeta 'docs'
